@@ -3,25 +3,49 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css" />
+
         <title>Small Projects</title>
     </head>
     <body>
-        <h2 class="heading-secondary">Text and Numeral Bases Converter</h2>
-        <label>From</label>
-        <select class="origin-type">
-            <option value="text">Text</option>
-            <option value="binary">Binary</option>
-        </select>
-        <label>To</label>
-        <select class="convert-type">
-            <option value="binary">Binary</option>
-            <option value="text">Text</option>
-        </select>
-        <textarea class="input"></textarea>
-        <textarea readonly class="output"></textarea>
+        <div class="container">
+            <h2 class="heading-secondary">Text and Numeral Bases Converter</h2>
+            <section>
+                <div class="interaction-div">
+                    <div class="selection-div">
+                        <label>From</label>
+                        <select class="origin-type">
+                            <option value="text">Text</option>
+                            <option value="binary">Binary</option>
+                        </select>
+                    </div>
+                    <textarea
+                        class="input"
+                        placeholder="Enter the content that you would like to convert here..."
+                    ></textarea>
+                </div>
+                <div class="interaction-div">
+                    <div class="selection-div">
+                        <label>To</label>
+                        <select class="convert-type">
+                            <option value="binary">Binary</option>
+                            <option value="text">Text</option>
+                        </select>
+                    </div>
+                    <textarea readonly class="output"></textarea>
+                </div>
+            </section>
 
-        <button class="btn btn--convert">Convert</button>
-
+            <button class="btn btn--convert">Convert</button>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>
