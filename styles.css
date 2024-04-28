@@ -27,7 +27,7 @@ textarea {
     width: 40rem;
     height: 20rem;
     /* color: #495057; */
-    color: #f8f9fa;
+    color: rgb(255, 0, 0);
     box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.1);
     border: 2px solid #495057;
     background-color: transparent;
@@ -93,6 +93,7 @@ label {
 }
 
 .input::placeholder {
-    color: #f1f3f5;
+    color: rgb(255, 0, 0);
+
     /* color: #adb5bd; */
 }
