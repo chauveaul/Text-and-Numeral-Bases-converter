@@ -17,6 +17,7 @@ html {
 
 body {
     font-family: "Rubik", sans-serif;
+    background-image: url("IMG_1395\ copy.jpg");
 }
 
 textarea {
@@ -25,16 +26,20 @@ textarea {
     border-radius: 8px;
     width: 40rem;
     height: 20rem;
-    color: #495057;
+    /* color: #495057; */
+    color: #f8f9fa;
     box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.1);
     border: 2px solid #495057;
+    background-color: transparent;
 }
 
 select {
     padding: 0.8rem 1.2rem;
     font-size: 2.4rem;
     border-radius: 8px;
-    color: #495057;
+    background-color: transparent;
+    /* color: #495057; */
+    color: #f1f3f5;
 }
 
 button {
@@ -44,8 +49,10 @@ button {
     font-size: 2.4rem;
     border-radius: 8px;
     padding: 1.6rem 2.4rem;
-    color: #495057;
+    /* color: #495057; */
+    color: #f1f3f5;
     background-color: #fff;
+    background-color: transparent;
     border: 2px solid #495057;
 }
 
@@ -60,7 +67,8 @@ h2 {
     font-size: 4.4rem;
     text-align: center;
     margin-bottom: 4.8rem;
-    color: #495057;
+    /* color: #495057; */
+    color: #f1f3f5;
 }
 
 .container {
@@ -80,9 +88,11 @@ h2 {
 label {
     font-size: 3rem;
     font-weight: 400;
-    color: #868e96;
+    /* color: #868e96; */
+    color: #f1f3f5;
 }
 
 .input::placeholder {
-    color: #adb5bd;
+    color: #f1f3f5;
+    /* color: #adb5bd; */
 }
