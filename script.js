@@ -7,6 +7,50 @@ const originTypeEl = document.querySelector(".origin-type");
 const convertTypeEl = document.querySelector(".convert-type");
 const btnConvertEl = document.querySelector(".btn--convert");
 
+let originTypeValue = "text";
+let convertTypeValue = "binary";
+
+//Listening when the user wants to convert
+btnConvertEl.addEventListener("click", function () {
+  if (originTypeEl.value === "text" && convertTypeEl.value === "binary")
+    textToBinary();
+  if (originTypeEl.value === "binary" && convertTypeEl.value === "text")
+    binaryToText();
+});
+
+//Simple implementation to convert when clicking enter
+inputAreaEl.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    btnConvertEl.click();
+  }
+});
+
+//Simple check to avoid having both select on the same value (if one gets set to the same value, it will swap them)
+
+originTypeEl.addEventListener("click", function () {
+  originTypeValue = originTypeEl.value;
+});
+
+convertTypeEl.addEventListener("click", function () {
+  convertTypeValue = convertTypeEl.value;
+});
+
+originTypeEl.onchange = function () {
+  if (originTypeEl.value === convertTypeEl.value)
+    convertTypeEl.value = originTypeValue;
+
+  outputAreaEl.value = "";
+  inputAreaEl.value = "";
+};
+convertTypeEl.onchange = function () {
+  if (convertTypeEl.value === originTypeEl.value)
+    originTypeEl.value = convertTypeValue;
+
+  outputAreaEl.value = "";
+  inputAreaEl.value = "";
+};
+
 //To start off with the logic
 function textToBinary() {
   const str = inputAreaEl.value.trim().split("");
@@ -44,6 +88,31 @@ function textToBinary() {
   outputAreaEl.value = binaryValues.join(" ");
 }
 
+function binaryToText() {
+  const source = inputAreaEl.value.split(" ");
+  //TODO: add check for non-binary chars
+
+  let result = "";
+
+  for (const char of source) {
+    let decimalValue = 0;
+    const binaryValues = [];
+
+    for (let i = 0; i < 8; i++) {
+      if (Number(char[i]) === 0) continue;
+      const currentBinary = "1".padEnd(8 - i, "0");
+      binaryValues.push(currentBinary);
+    }
+
+    for (const value of binaryValues) {
+      decimalValue += 2 ** (value.length - 1);
+    }
+    result += String.fromCharCode(decimalValue);
+  }
+
+  outputAreaEl.value = result;
+}
+
 function decimalToByte(base, value) {
   let result = "";
   while (value / base >= 1) {
@@ -51,10 +120,8 @@ function decimalToByte(base, value) {
     value /= base;
   }
   result = (value % base) + result;
-  return result.padStart(8, "0");
+  return result;
 }
-
-btnConvertEl.addEventListener("click", textToBinary);
 
 // function convertFromString(base, str) {
 //   if (originTypeEl.value === "text") console.log("idk had to print smt");
