@@ -13,7 +13,6 @@ let convertTypeValue = "binary";
 //Using an object to store these functions to be able to access them using strings for changing between
 //different Numeral Bases
 const conversionFuncs = {
-  //Can definitely refactor this
   textToBinary: function (source = inputAreaEl.value.trim()) {
     source = source.split("");
     const binaryValues = [];
@@ -23,8 +22,7 @@ const conversionFuncs = {
       let charCode = char.charCodeAt(0);
       //Array to store the powers
       const powers = [];
-
-      // calculating 2**n starting at n = 8 (closest to max ascii value which is 255)
+      //Calculating 2**n starting at n = 8 (closest to max ascii value which is 255)
       for (let i = 8; i >= 0; i--) {
         if (charCode === 0) break;
         if (2 ** i <= charCode) {
@@ -43,6 +41,7 @@ const conversionFuncs = {
       for (const value of powers) {
         sum += Number(decimalToByte(2, 2 ** value));
       }
+      //Adding the necessary amount of 0 to get the the correct length
       sum = String(sum).padStart(8, "0");
       binaryValues.push(sum);
     }
@@ -59,6 +58,7 @@ const conversionFuncs = {
       let decimalValue = 0;
       const binaryValues = [];
 
+      //Doing the same operation as binaryToText but backwards.
       for (let i = 0; i < 8; i++) {
         if (Number(char[i]) === 0) continue;
         const currentBinary = "1".padEnd(8 - i, "0");
@@ -93,29 +93,14 @@ const conversionFuncs = {
     for (const value of source) {
       let decimalValue = 0;
       decimalValue += Number(value[0]) * 16;
-      switch (value[1]) {
-        //Can easily refactor with difference between ascii code and reflect that on decimal value
-        case "A":
-          decimalValue += 10;
-          break;
-        case "B":
-          decimalValue += 11;
-          break;
-        case "C":
-          decimalValue += 12;
-          break;
-        case "D":
-          decimalValue += 13;
-          break;
-        case "E":
-          decimalValue += 14;
-          break;
-        case "F":
-          decimalValue += 15;
-          break;
-        default:
-          decimalValue += Number(value[1]);
-          break;
+      //Adding to the decimal value. If current character is a letter, check the difference between
+      //i and ascii char code of "A"
+      if (value.charCodeAt(1) >= 65 && value.charCodeAt(1) <= 70) {
+        for (let i = 65; i <= 70; i++) {
+          if (value.charCodeAt(1) === i) decimalValue += 9 + (70 - i);
+        }
+      } else {
+        decimalValue += Number(value[1]);
       }
       chars.push(String.fromCharCode(decimalValue));
     }
@@ -175,6 +160,7 @@ const conversionFuncs = {
 
 //Listening when the user wants to convert
 btnConvertEl.addEventListener("click", function () {
+  //Checking for all possible combinations and calling the proper function/method
   if (originTypeEl.value === "text") {
     if (convertTypeEl.value === "binary") conversionFuncs.textToBinary();
     if (convertTypeEl.value === "hexadecimal") conversionFuncs.textToHex();
@@ -228,7 +214,6 @@ inputAreaEl.addEventListener("keydown", function (e) {
 });
 
 //Simple check to avoid having both select on the same value (if one gets set to the same value, it will swap them)
-
 originTypeEl.addEventListener("click", function () {
   originTypeValue = originTypeEl.value;
 });
@@ -252,16 +237,23 @@ convertTypeEl.onchange = function () {
   inputAreaEl.value = "";
 };
 
+//Conversion between two types of numeral bases. I figure which operation to do based on
+//origin type and converted type and then use the strings I built to access to appropriate
+//functions in the object.
+//Ex. (binary, hex) --> firstOperation = "binaryToText", secondOperation = "textToHex"
+//     ^        ^
+//     origin   type to convert to
 function conversionBetweenNumeralBases(origin, convert) {
   let source = inputAreaEl.value;
 
+  //Transforming the orgin to text
   let firstOperation = origin.toLowerCase() + "ToText";
+  //Trasforming from text to converted type
   let secondOperation =
     "textTo" +
     convert.charAt(0).toUpperCase() +
     convert.substring(1).toLowerCase();
 
-  //Check hex to text
   source = conversionFuncs[firstOperation](source);
   source = conversionFuncs[secondOperation](source);
   outputAreaEl.value = source;
@@ -281,54 +273,17 @@ function decimalToByte(base, value) {
   else if (base === 6) {
     for (let i = 15; i > 0; i--) {
       if (i * 16 > value) continue;
-      switch (i) {
-        case 10:
-          result += "A";
-          break;
-        case 11:
-          result += "B";
-          break;
-        case 12:
-          result += "C";
-          break;
-        case 13:
-          result += "D";
-          break;
-        case 14:
-          result += "E";
-          break;
-        case 15:
-          result += "F";
-          break;
-        //If i is a single digit
-        default:
-          result += i;
-      }
+      //Adding to the result based on the difference of ascii char code between i and "A"
+      if (i >= 10) {
+        result += String.fromCharCode(65 + (i - 10));
+      } else result += i;
       value -= 16 * i;
       break;
     }
-    switch (value) {
-      case 10:
-        result += "A";
-        break;
-      case 11:
-        result += "B";
-        break;
-      case 12:
-        result += "C";
-        break;
-      case 13:
-        result += "D";
-        break;
-      case 14:
-        result += "E";
-        break;
-      case 15:
-        result += "F";
-        break;
-      default:
-        result += value;
-    }
+    //Adding to the result based on the difference of ascii char code between value and "A"
+    if (value >= 10) {
+      result += String.fromCharCode(65 + (value - 10));
+    } else result += value;
   }
   return result;
 }
