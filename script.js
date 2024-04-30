@@ -10,27 +10,39 @@ const btnConvertEl = document.querySelector(".btn--convert");
 let originTypeValue = "text";
 let convertTypeValue = "binary";
 
+//TODO: Refactor interchangeable number bases to objects with functions to access it by building a string
+
 //Listening when the user wants to convert
 btnConvertEl.addEventListener("click", function () {
   if (originTypeEl.value === "text") {
     if (convertTypeEl.value === "binary") textToBinary();
     if (convertTypeEl.value === "hexadecimal") textToHex();
     if (convertTypeEl.value === "octal") textToOctal();
+    if (convertTypeEl.value === "decimal") textToDecimal();
   }
   if (originTypeEl.value === "binary") {
     if (convertTypeEl.value === "text") binaryToText();
     if (convertTypeEl.value === "hexadecimal") binaryToHex();
     if (convertTypeEl.value === "octal") binaryToOctal();
+    if (convertTypeEl.value === "decimal") binaryToDecimal();
   }
   if (originTypeEl.value === "hexadecimal") {
     if (convertTypeEl.value === "text") hexToText();
     if (convertTypeEl.value === "binary") hexToBinary();
     if (convertTypeEl.value === "octal") hexToOctal();
+    if (convertTypeEl.value === "decimal") hexToDecimal();
   }
   if (originTypeEl.value === "octal") {
     if (convertTypeEl.value === "text") octalToText();
     if (convertTypeEl.value === "binary") octalToBinary();
     if (convertTypeEl.value === "hexadecimal") octalToHex();
+    if (convertTypeEl.value === "decimal") octalToDecimal();
+  }
+  if (originTypeEl.value === "decimal") {
+    if (convertTypeEl.value === "text") decimalToText();
+    if (convertTypeEl.value === "binary") decimalToBinary();
+    if (convertTypeEl.value === "hexadecimal") decimalToHex();
+    if (convertTypeEl.value === "octal") decimalToOctal();
   }
 });
 
@@ -66,6 +78,69 @@ convertTypeEl.onchange = function () {
   outputAreaEl.value = "";
   inputAreaEl.value = "";
 };
+
+function textToDecimal(source = inputAreaEl.value) {
+  source = [...source];
+  const result = [];
+  for (const char of source) {
+    result.push(char.charCodeAt(0));
+  }
+  outputAreaEl.value = result.join(" ");
+  return result.join(" ");
+}
+
+function decimalToText(source = inputAreaEl.value) {
+  source = source.split(" ");
+  let result = "";
+  for (const value of source) {
+    result += String.fromCharCode(value);
+  }
+
+  outputAreaEl.value = result;
+  return result;
+}
+
+function binaryToDecimal() {
+  let source = inputAreaEl.value;
+  source = binaryToText(source);
+  source = textToDecimal(source);
+  outputAreaEl.value = source;
+}
+
+function hexToDecimal() {
+  let source = inputAreaEl.value;
+  source = hexToText(source);
+  source = textToDecimal(source);
+  outputAreaEl.value = source;
+}
+
+function octalToDecimal() {
+  let source = inputAreaEl.value;
+  source = octalToText(source);
+  source = textToDecimal(source);
+  outputAreaEl.value = source;
+}
+
+function decimalToBinary() {
+  let source = inputAreaEl.value;
+  source = decimalToText(source);
+  source = textToBinary(source);
+  outputAreaEl.value = source;
+}
+
+function decimalToHex() {
+  let source = inputAreaEl.value;
+  source = decimalToText(source);
+  source = textToHex(source);
+  outputAreaEl.value = source;
+}
+
+function decimalToOctal() {
+  let source = inputAreaEl.value;
+  source = decimalToText(source);
+  source = textToOctal(source);
+  outputAreaEl.value = source;
+}
 
 function textToBinary(source = inputAreaEl.value.trim()) {
   source = source.split("");
@@ -187,7 +262,6 @@ function hexToText(source = inputAreaEl.value) {
   return chars.join("");
 }
 
-//Might just do hex --> text --> binary
 function hexToBinary() {
   let source = inputAreaEl.value;
   source = hexToText(source);
