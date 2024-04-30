@@ -21,14 +21,21 @@
             <section>
                 <div class="interaction-div">
                     <div class="selection-div">
-                        <label>From</label>
-                        <select class="origin-type">
+                        <label>From:</label>
+                        <div class="list input-list">
+                            <button class="input--text selected">Text</button>
+                            <button class="input--binary">Binary</button>
+                            <button class="input--hex">Hex</button>
+                            <button class="input--octal">Octal</button>
+                            <button class="input--decimal">Decimal</button>
+                        </div>
+                        <!-- <select class="origin-type">
                             <option value="text">Text</option>
                             <option value="binary">Binary</option>
                             <option value="hexadecimal">Hexadecimal</option>
                             <option value="octal">Octal</option>
                             <option value="decimal">Decimal</option>
-                        </select>
+                        </select> -->
                     </div>
                     <textarea
                         class="input"
@@ -37,21 +44,41 @@
                 </div>
                 <div class="interaction-div">
                     <div class="selection-div">
-                        <label>To</label>
-                        <select class="convert-type">
+                        <label>To:</label>
+                        <div class="list output-list">
+                            <button class="output--binary selected">
+                                Binary
+                            </button>
+                            <button class="output--text">Text</button>
+                            <button class="output--hex">Hex</button>
+                            <button class="output--octal">Octal</button>
+                            <button class="output--decimal">Decimal</button>
+                        </div>
+                        <!-- <select class="convert-type">
                             <option value="binary">Binary</option>
                             <option value="hexadecimal">Hexadecimal</option>
                             <option value="octal">Octal</option>
                             <option value="decimal">Decimal</option>
                             <option value="text">Text</option>
-                        </select>
+                        </select> -->
                     </div>
                     <textarea readonly class="output"></textarea>
                 </div>
             </section>
 
-            <button class="btn btn--convert">Convert</button>
+            <button class="btn btn--convert">
+                <ion-icon class="icon" name="repeat-outline"></ion-icon>
+                <span>Convert</span>
+            </button>
         </div>
         <script src="script.js"></script>
+        <script
+            type="module"
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+        ></script>
     </body>
 </html>

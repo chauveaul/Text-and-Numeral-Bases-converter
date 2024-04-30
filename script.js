@@ -3,8 +3,18 @@
 const inputAreaEl = document.querySelector(".input");
 const outputAreaEl = document.querySelector(".output");
 
-const originTypeEl = document.querySelector(".origin-type");
-const convertTypeEl = document.querySelector(".convert-type");
+const fromTextEl = document.querySelector(".input--text");
+const fromBinaryEl = document.querySelector(".input--binary");
+const fromHexEl = document.querySelector(".input--hex");
+const fromOctalEl = document.querySelector(".input--octal");
+const fromDecimalEl = document.querySelector(".input--decimal");
+
+const toBinaryEl = document.querySelector(".output--binary");
+const toTextEl = document.querySelector(".output--text");
+const toHexEl = document.querySelector(".output--hex");
+const toOctalEl = document.querySelector(".output--octal");
+const toDecimalEl = document.querySelector(".output--decimal");
+
 const btnConvertEl = document.querySelector(".btn--convert");
 
 let originTypeValue = "text";
@@ -158,50 +168,220 @@ const conversionFuncs = {
   },
 };
 
+//Adding input types event listeners
+fromTextEl.addEventListener("click", function () {
+  removeSelectedInput();
+  fromTextEl.classList.add("selected");
+  if (convertTypeValue === "text") {
+    convertTypeValue = originTypeValue;
+    changeConvertType();
+  }
+  originTypeValue = "text";
+  console.log(originTypeValue);
+});
+
+fromBinaryEl.addEventListener("click", function () {
+  removeSelectedInput();
+  fromBinaryEl.classList.add("selected");
+  if (convertTypeValue === "binary") {
+    convertTypeValue = originTypeValue;
+    changeConvertType();
+  }
+  originTypeValue = "binary";
+});
+
+fromHexEl.addEventListener("click", function () {
+  removeSelectedInput();
+  fromHexEl.classList.add("selected");
+  if (convertTypeValue === "hex") {
+    convertTypeValue = originTypeValue;
+    changeConvertType();
+  }
+  originTypeValue = "hex";
+});
+
+fromOctalEl.addEventListener("click", function () {
+  removeSelectedInput();
+  fromOctalEl.classList.add("selected");
+  if (convertTypeValue === "octal") {
+    convertTypeValue = originTypeValue;
+    changeConvertType();
+  }
+  originTypeValue = "octal";
+});
+
+fromDecimalEl.addEventListener("click", function () {
+  removeSelectedInput();
+  fromDecimalEl.classList.add("selected");
+  if (convertTypeValue === "decimal") {
+    convertTypeValue = originTypeValue;
+    changeConvertType();
+  }
+  originTypeValue = "decimal";
+});
+
+//Adding output types event listeners
+toTextEl.addEventListener("click", function () {
+  removeSelectedOutput();
+  toTextEl.classList.add("selected");
+  if (originTypeValue === "text") {
+    originTypeValue = convertTypeValue;
+    changeOriginType();
+  }
+  convertTypeValue = "text";
+  console.log(convertTypeValue);
+});
+
+toBinaryEl.addEventListener("click", function () {
+  removeSelectedOutput();
+  toBinaryEl.classList.add("selected");
+  if (originTypeValue === "binary") {
+    originTypeValue = convertTypeValue;
+    changeOriginType();
+  }
+  convertTypeValue = "binary";
+});
+
+toHexEl.addEventListener("click", function () {
+  removeSelectedOutput();
+  toHexEl.classList.add("selected");
+  if (originTypeValue === "hex") {
+    originTypeValue = convertTypeValue;
+    changeOriginType();
+  }
+  convertTypeValue = "hex";
+});
+
+toOctalEl.addEventListener("click", function () {
+  removeSelectedOutput();
+  toOctalEl.classList.add("selected");
+  if (originTypeValue === "octal") {
+    originTypeValue = convertTypeValue;
+    changeOriginType();
+  }
+  convertTypeValue = "octal";
+});
+
+toDecimalEl.addEventListener("click", function () {
+  removeSelectedOutput();
+  toDecimalEl.classList.add("selected");
+  if (originTypeValue === "decimal") {
+    originTypeValue = convertTypeValue;
+    changeOriginType();
+  }
+  convertTypeValue = "decimal";
+});
+
+function changeOriginType() {
+  removeSelectedInput();
+  switch (originTypeValue) {
+    case "text":
+      fromTextEl.classList.add("selected");
+      break;
+    case "binary":
+      fromBinaryEl.classList.add("selected");
+      break;
+    case "hex":
+      fromHexEl.classList.add("selected");
+      break;
+    case "octal":
+      fromOctalEl.classList.add("selected");
+      break;
+    case "decimal":
+      fromDecimalEl.classList.add("selected");
+      break;
+  }
+}
+
+function changeConvertType() {
+  removeSelectedOutput();
+  switch (convertTypeValue) {
+    case "text":
+      toTextEl.classList.add("selected");
+      break;
+    case "binary":
+      toBinaryEl.classList.add("selected");
+      break;
+    case "hex":
+      toHexEl.classList.add("selected");
+      break;
+    case "octal":
+      toOctalEl.classList.add("selected");
+      break;
+    case "decimal":
+      toDecimalEl.classList.add("selected");
+      break;
+  }
+}
+
+function removeSelectedInput() {
+  fromTextEl.classList.remove("selected");
+  fromBinaryEl.classList.remove("selected");
+  fromHexEl.classList.remove("selected");
+  fromOctalEl.classList.remove("selected");
+  fromDecimalEl.classList.remove("selected");
+}
+
+function removeSelectedOutput() {
+  toTextEl.classList.remove("selected");
+  toBinaryEl.classList.remove("selected");
+  toHexEl.classList.remove("selected");
+  toOctalEl.classList.remove("selected");
+  toDecimalEl.classList.remove("selected");
+}
+
 //Listening when the user wants to convert
 btnConvertEl.addEventListener("click", function () {
-  //Checking for all possible combinations and calling the proper function/method
-  if (originTypeEl.value === "text") {
-    if (convertTypeEl.value === "binary") conversionFuncs.textToBinary();
-    if (convertTypeEl.value === "hexadecimal") conversionFuncs.textToHex();
-    if (convertTypeEl.value === "octal") conversionFuncs.textToOctal();
-    if (convertTypeEl.value === "decimal") conversionFuncs.textToDecimal();
-  }
-  if (originTypeEl.value === "binary") {
-    if (convertTypeEl.value === "text") conversionFuncs.binaryToText();
-    if (convertTypeEl.value === "hexadecimal")
-      conversionBetweenNumeralBases("binary", "hex");
-    if (convertTypeEl.value === "octal")
-      conversionBetweenNumeralBases("binary", "octal");
-    if (convertTypeEl.value === "decimal")
-      conversionBetweenNumeralBases("binary", "decimal");
-  }
-  if (originTypeEl.value === "hexadecimal") {
-    if (convertTypeEl.value === "text") conversionFuncs.hexToText();
-    if (convertTypeEl.value === "binary")
-      conversionBetweenNumeralBases("hex", "binary");
-    if (convertTypeEl.value === "octal")
-      conversionBetweenNumeralBases("hex", "octal");
-    if (convertTypeEl.value === "decimal")
-      conversionBetweenNumeralBases("hex", "decimal");
-  }
-  if (originTypeEl.value === "octal") {
-    if (convertTypeEl.value === "text") conversionFuncs.octalToText();
-    if (convertTypeEl.value === "binary")
-      conversionBetweenNumeralBases("octal", "binary");
-    if (convertTypeEl.value === "hexadecimal")
-      conversionBetweenNumeralBases("octal", "hex");
-    if (convertTypeEl.value === "decimal")
-      conversionBetweenNumeralBases("octal", "decimal");
-  }
-  if (originTypeEl.value === "decimal") {
-    if (convertTypeEl.value === "text") conversionFuncs.decimalToText();
-    if (convertTypeEl.value === "binary")
-      conversionBetweenNumeralBases("decimal", "binary");
-    if (convertTypeEl.value === "hexadecimal")
-      conversionBetweenNumeralBases("decimal", "hex");
-    if (convertTypeEl.value === "octal")
-      conversionBetweenNumeralBases("decimal", "octal");
+  if (inputAreaEl.value === "") outputAreaEl.value = "";
+  else {
+    if (fromTextEl.classList.contains("selected")) {
+      if (toBinaryEl.classList.contains("selected"))
+        conversionFuncs.textToBinary();
+      if (toHexEl.classList.contains("selected")) conversionFuncs.textToHex();
+      if (toOctalEl.classList.contains("selected"))
+        conversionFuncs.textToOctal();
+      if (toDecimalEl.classList.contains("selected"))
+        conversionFuncs.textToDecimal();
+    }
+    if (fromBinaryEl.classList.contains("selected")) {
+      if (toTextEl.classList.contains("selected"))
+        conversionFuncs.binaryToText();
+      if (toHexEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("binary", "hex");
+      if (toOctalEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("binary", "octal");
+      if (toDecimalEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("binary", "decimal");
+    }
+    if (fromHexEl.classList.contains("selected")) {
+      if (toTextEl.classList.contains("selected")) conversionFuncs.hexToText();
+      if (toBinaryEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("hex", "binary");
+      if (toOctalEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("hex", "octal");
+      if (toDecimalEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("hex", "decimal");
+    }
+    if (fromOctalEl.classList.contains("selected")) {
+      if (toTextEl.classList.contains("selected"))
+        conversionFuncs.octalToText();
+      if (toBinaryEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("octal", "binary");
+      if (toHexEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("octal", "hex");
+      if (toDecimalEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("octal", "decimal");
+    }
+    if (fromDecimalEl.classList.contains("selected")) {
+      if (toTextEl.classList.contains("selected"))
+        conversionFuncs.decimalToText();
+      if (toBinaryEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("decimal", "binary");
+      if (toHexEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("decimal", "hex");
+      if (toOctalEl.classList.contains("selected"))
+        conversionBetweenNumeralBases("decimal", "octal");
+    }
   }
 });
 
@@ -212,30 +392,6 @@ inputAreaEl.addEventListener("keydown", function (e) {
     btnConvertEl.click();
   }
 });
-
-//Simple check to avoid having both select on the same value (if one gets set to the same value, it will swap them)
-originTypeEl.addEventListener("click", function () {
-  originTypeValue = originTypeEl.value;
-});
-
-convertTypeEl.addEventListener("click", function () {
-  convertTypeValue = convertTypeEl.value;
-});
-
-originTypeEl.onchange = function () {
-  if (originTypeEl.value === convertTypeEl.value)
-    convertTypeEl.value = originTypeValue;
-
-  outputAreaEl.value = "";
-  inputAreaEl.value = "";
-};
-convertTypeEl.onchange = function () {
-  if (convertTypeEl.value === originTypeEl.value)
-    originTypeEl.value = convertTypeValue;
-
-  outputAreaEl.value = "";
-  inputAreaEl.value = "";
-};
 
 //Conversion between two types of numeral bases. I figure which operation to do based on
 //origin type and converted type and then use the strings I built to access to appropriate
