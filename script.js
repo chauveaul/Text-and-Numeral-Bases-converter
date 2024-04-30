@@ -15,14 +15,22 @@ btnConvertEl.addEventListener("click", function () {
   if (originTypeEl.value === "text") {
     if (convertTypeEl.value === "binary") textToBinary();
     if (convertTypeEl.value === "hexadecimal") textToHex();
+    if (convertTypeEl.value === "octal") textToOctal();
   }
   if (originTypeEl.value === "binary") {
     if (convertTypeEl.value === "text") binaryToText();
     if (convertTypeEl.value === "hexadecimal") binaryToHex();
+    if (convertTypeEl.value === "octal") binaryToOctal();
   }
   if (originTypeEl.value === "hexadecimal") {
     if (convertTypeEl.value === "text") hexToText();
     if (convertTypeEl.value === "binary") hexToBinary();
+    if (convertTypeEl.value === "octal") hexToOctal();
+  }
+  if (originTypeEl.value === "octal") {
+    if (convertTypeEl.value === "text") octalToText();
+    if (convertTypeEl.value === "binary") octalToBinary();
+    if (convertTypeEl.value === "hexadecimal") octalToHex();
   }
 });
 
@@ -118,7 +126,6 @@ function binaryToText(source = inputAreaEl.value) {
   }
 
   outputAreaEl.value = result;
-  console.log(result);
   return result;
 }
 
@@ -149,7 +156,6 @@ function hexToText(source = inputAreaEl.value) {
   for (const value of source) {
     let decimalValue = 0;
     decimalValue += Number(value[0]) * 16;
-    console.log(value[1]);
     switch (value[1]) {
       //Can easily refactor with difference between ascii code and reflect that on decimal value
       case "A":
@@ -189,17 +195,78 @@ function hexToBinary() {
   outputAreaEl.value = source;
 }
 
+function textToOctal(source = inputAreaEl.value) {
+  source = source.split("");
+  const octalValues = [];
+
+  for (const char of source) {
+    let charCode = char.charCodeAt(0);
+    octalValues.push(decimalToByte(8, charCode));
+  }
+
+  outputAreaEl.value = octalValues.join(" ");
+  return octalValues.join(" ");
+}
+
+function octalToText(source = inputAreaEl.value) {
+  source = source.split(" ");
+  const result = [];
+
+  for (const value of source) {
+    let charCode = 0;
+    let index = 0;
+    for (let i = value.length - 1; i >= 0; i--) {
+      charCode += value[index] * 8 ** i;
+      console.log(`Value at position ${index}: ${value[index] * 8 ** i}`);
+      index++;
+    }
+    console.log(`Char code: ${charCode}`);
+    result.push(String.fromCharCode(charCode));
+  }
+
+  outputAreaEl.value = result.join("");
+  return result.join("");
+}
+
+function binaryToOctal() {
+  let source = inputAreaEl.value;
+  source = binaryToText(source);
+  source = textToOctal(source);
+  outputAreaEl.value = source;
+}
+
+function hexToOctal() {
+  let source = inputAreaEl.value;
+  source = hexToText(source);
+  source = textToOctal(source);
+  outputAreaEl.value = source;
+}
+
+function octalToBinary() {
+  let source = inputAreaEl.value;
+  source = octalToText(source);
+  source = textToBinary(source);
+  outputAreaEl.value = source;
+}
+
+function octalToHex() {
+  let source = inputAreaEl.value;
+  source = octalToText(source);
+  source = textToHex(source);
+  outputAreaEl.value = source;
+}
+
 function decimalToByte(base, value) {
   let result = "";
-  //Binary transformation
-  if (base === 2) {
+  //Binary conversion and octal conversion
+  if (base === 2 || base === 8) {
     while (value / base >= 1) {
       result = (value % base) + result;
-      value /= base;
+      value = Math.trunc(value / base);
     }
     result = (value % base) + result;
   }
-  //Hex transformation
+  //Hex conversion
   else if (base === 6) {
     for (let i = 15; i > 0; i--) {
       if (i * 16 > value) continue;
@@ -254,8 +321,3 @@ function decimalToByte(base, value) {
   }
   return result;
 }
-
-// function convertFromString(base, str) {
-//   if (originTypeEl.value === "text") console.log("idk had to print smt");
-// }
-// function convertToString(base) {}
