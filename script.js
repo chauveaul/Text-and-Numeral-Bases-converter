@@ -107,7 +107,9 @@ const conversionFuncs = {
       //i and ascii char code of "A"
       if (value.charCodeAt(1) >= 65 && value.charCodeAt(1) <= 70) {
         for (let i = 65; i <= 70; i++) {
-          if (value.charCodeAt(1) === i) decimalValue += 9 + (70 - i);
+          if (value.charCodeAt(1) === i) {
+            decimalValue += 10 + (i - 65);
+          }
         }
       } else {
         decimalValue += Number(value[1]);
@@ -177,7 +179,6 @@ fromTextEl.addEventListener("click", function () {
     changeConvertType();
   }
   originTypeValue = "text";
-  console.log(originTypeValue);
 });
 
 fromBinaryEl.addEventListener("click", function () {
@@ -229,7 +230,6 @@ toTextEl.addEventListener("click", function () {
     changeOriginType();
   }
   convertTypeValue = "text";
-  console.log(convertTypeValue);
 });
 
 toBinaryEl.addEventListener("click", function () {
