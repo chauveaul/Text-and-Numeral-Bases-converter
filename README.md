@@ -1,10 +1,10 @@
-#A simple and minimalist converter between numeral bases and text
+# A simple and minimalist converter between numeral bases and text
 
-##A fully functional converter between text, binary, hexadecimal, octal and decimal.
+## A fully functional converter between text, binary, hexadecimal, octal and decimal.
 
 This simple project was made using JavaScript, HTML and CSS. This program has all its conversion types in a single page, and lets the user quickly alternate between conversion types without having to change pages. It comes in very handy when a quick conversion is required.
 
-##How to run this project on your machine
+## How to run this project on your machine
 
 There are three ways to achieve this
 
@@ -28,6 +28,6 @@ There are three ways to achieve this
   3. Install the live-server package using Node Package Manager. To do this, head into your terminal and write `npm install live-server -g`. The `-g` tag will make sure the package is installed globally on your machine so you don't need to re-install it later on.
   4. Finally, navigate to the project folder in your terminal and type `live-server`
 
-##How to use the program
+## How to use the program
 
 Simply select on the left list the intial format and on the left the format that you would like to convert to, write your content in the left box and click convert. Ex. If I would like to convert text to binary, I would select text on the left and binary on the right.
