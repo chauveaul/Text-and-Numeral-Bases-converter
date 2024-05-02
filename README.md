@@ -25,7 +25,7 @@ There are three ways to achieve this
 
   1. Head to the top of the page and click on the green button to download the .zip file.
   2. Make sure that you have node installed. To check this, open a new terminal window and type `node --version`. If the version number is displayed, you can continue to the next step. Otherwise, head to the <a href="https://nodejs.org/en/download" target="_blank">Node.js Download page</a> and install the latest version.
-  3. Install the live-server package using Node Package Manager. To do this, head into your terminal and write `npm install live-server -g`. The `-g` tag will make sure the package is installed globally on your machine so you don't need to re-install it later on.
+  3. Install the live-server package using Node Package Manager. To do this, head into your terminal and write `npm install live-server -g` for windows and `sudo npm install live-server -g` for mac. The `-g` tag will make sure the package is installed globally on your machine so you don't need to re-install it later on.
   4. Finally, navigate to the project folder in your terminal and type `live-server`
 
 ## How to use the program
