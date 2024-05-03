@@ -18,8 +18,6 @@ There are three ways to achieve this
     ![Extract zip mac](https://github.com/chauveaul/Text-and-Numeral-Bases-converter/assets/64046339/6b088558-6fbc-46c8-a4b5-782d0bb01abc) ![Extract windows](https://github.com/chauveaul/Text-and-Numeral-Bases-converter/assets/64046339/b9b9a2d1-46e4-4299-90b7-e20dffdcd7f9)
 
   3. Launch index.html and enjoy!
-     
-     ![Open html](https://github.com/chauveaul/Text-and-Numeral-Bases-converter/assets/64046339/9ad660e8-f5d3-4b79-b37d-e850c60f294f)
 
 - Using the live-server VS Code extension
 
