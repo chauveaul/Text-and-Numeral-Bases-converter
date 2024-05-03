@@ -52,6 +52,4 @@ There are three ways to achieve this
 
 https://github.com/chauveaul/Text-and-Numeral-Bases-converter/assets/64046339/4161ad3c-175f-4864-8086-81d0f7b68afe
 
-![Download zip](https://github.com/chauveaul/Text-and-Numeral-Bases-converter/assets/64046339/a5c63fc2-855a-4ae9-86bb-1d14050adf71)
-
 Simply select on the left list the intial format and on the left the format that you would like to convert to, write your content in the left box and click convert. Ex. If I would like to convert text to binary, I would select text on the left and binary on the right.
