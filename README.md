@@ -11,6 +11,7 @@ There are three ways to achieve this
 - Launching the HTML file (the simplest)
 
   1. Head to the top of the page and click on the green button to download the .zip file.
+
      ![Download zip](https://github.com/chauveaul/Text-and-Numeral-Bases-converter/assets/64046339/d1ae85b8-829d-49fd-ba93-57c6b15c023d)
   2. Extract the downloaded folder and navigate inside it
     ![Extract zip mac](https://github.com/chauveaul/Text-and-Numeral-Bases-converter/assets/64046339/6b088558-6fbc-46c8-a4b5-782d0bb01abc) ![Extract windows](https://github.com/chauveaul/Text-and-Numeral-Bases-converter/assets/64046339/b9b9a2d1-46e4-4299-90b7-e20dffdcd7f9)
