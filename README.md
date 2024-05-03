@@ -27,8 +27,6 @@ There are three ways to achieve this
      
   2. Extract the folder and open it in a new VS Code window.
      
-     ![VS Code pt 1](https://github.com/chauveaul/Text-and-Numeral-Bases-converter/assets/64046339/ac0c563d-93e5-4bbd-8499-952dadd434e4)
-     
   3. Head into the Extensions tab and search for `Live Server`
      
      ![VS Code pt 2](https://github.com/chauveaul/Text-and-Numeral-Bases-converter/assets/64046339/ef3e5a96-1bd6-4ddf-a593-1a448aeb599b)
